@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const {isEmail}  =require('validator');
+const bcrypt = require('bcrypt')
 
 
 
@@ -26,10 +27,19 @@ const userSchema = new mongoose.Schema({
         max: 1024,
         minLenght: 6,
       },
+      
 
  
 
 });
+// play function before save into display : 'block',
+userSchema.pre('save', async function(next){
+  // on salt le MDP 
+  const salt = await bcrypt.genSalt();
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
 
 
 
