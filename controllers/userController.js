@@ -11,4 +11,12 @@ const ObjectId = require('mongoose').Types.ObjectId;
  //tu revoie un status de users 
  res.status(200).json(users)
 
+ };
+ module.exports.userInfo = async (req,res) => {
+    console.log(req.params)
+    if (!ObjectId.isValid(req.params.id)){
+        res.status(400).json('Id unknow' + req.params.id);
+    }else{
+        
+    }
  }
